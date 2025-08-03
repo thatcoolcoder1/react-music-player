@@ -11,12 +11,7 @@ const MusicPlayer = () => {
   const [duration, setDuration] = useState(0);
   const [IsSliding, setIsSliding] = useState(false);
   const [TempTime, setTempTime] = useState<number>();
-const [Playlist, setPlaylist] = useState([
-  { title: 'At-my-worst', source: 'src\\assets\\songs\\At-My-Worst.mp3' },
-  { title: 'gata', source: 'src\\assets\\songs\\gata.mp3' },
-  { title: 'sou', source: 'src\\assets\\songs\\.mp3' }
-]);
-  
+  const [Playlist, setPlaylist] = useState([{ title: '', source: '' }]); 
 
   const AddSongs = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
