@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { FiHome, FiMusic, FiHeart, FiSettings } from 'react-icons/fi';
 
 const SideBar = () => {
