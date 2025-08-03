@@ -16,7 +16,7 @@ const [Playlist, setPlaylist] = useState([
   { title: 'gata', source: 'src\\assets\\songs\\gata.mp3' },
   { title: 'sou', source: 'src\\assets\\songs\\.mp3' }
 ]);
-  const [isReady, setIsReady] = useState(false);
+  
 
   const AddSongs = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -36,13 +36,13 @@ const [Playlist, setPlaylist] = useState([
   useEffect(() => {
     if (Playlist.length === 0 || !Playlist[0].source) return;
 
-    setIsReady(false);
+    // setIsReady(false);
 
     AudioController.loadPlaylist(Playlist)
-      .then(() => setIsReady(true))
+      .then()
       .catch((err) => {
         console.error('Playback error:', err);
-        setIsReady(false);
+        // setIsReady(false);
       });
 
     AudioController.onTimeUpdate(() => {
@@ -79,7 +79,7 @@ const [Playlist, setPlaylist] = useState([
       ? '0:00'
       : `${Math.floor(seconds! / 60)}:${('0' + Math.floor(seconds! % 60)).slice(-2)}`;
 
-  const progress = duration ? (currentTime / duration) * 100 : 0;
+  // const progress = duration ? (currentTime / duration) * 100 : 0;
 
   return (
     <div className="backdrop-blur-md bg-white/10 text-white px-6 py-6 rounded-2xl shadow-xl border border-white/20 w-[90vw] max-w-md mx-auto">
@@ -145,10 +145,11 @@ const [Playlist, setPlaylist] = useState([
           value={IsSliding ? TempTime : currentTime || 0}
           onChange={(e) => setTempTime(Number(e.target.value))}
           onMouseDown={() => setIsSliding(true)}
-          onMouseUp={(e) => {
-            AudioController.seek(Number(e.target.value));
-            setIsSliding(false);
-          }}
+  onMouseUp={(e) => {
+  const target = e.target as HTMLInputElement;
+  AudioController.seek(Number(target.value));
+  setIsSliding(false);
+}}
           className="w-full accent-purple-500 h-2 rounded-full bg-white/20"
         />
         <span className="w-10">{formatTime(duration)}</span>
