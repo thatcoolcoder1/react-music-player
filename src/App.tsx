@@ -12,8 +12,8 @@ const App = () => {
 
       {/* Main layout */}
       <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
-        {/* Sidebar */}
-        <div className="w-full lg:w-1/4">
+        {/* Sidebar - hidden on small screens */}
+        <div className="hidden lg:block lg:w-1/4">
           <SideBar />
         </div>
 
