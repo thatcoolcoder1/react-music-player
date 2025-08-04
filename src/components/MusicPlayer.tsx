@@ -134,19 +134,31 @@ const MusicPlayer = () => {
           {formatTime(IsSliding ? TempTime : currentTime)}
         </span>
         <input
-          type="range"
-          min="0"
-          max={duration || 0}
-          value={IsSliding ? TempTime : currentTime || 0}
-          onChange={(e) => setTempTime(Number(e.target.value))}
-          onMouseDown={() => setIsSliding(true)}
+  type="range"
+  min="0"
+  max={duration || 0}
+  value={IsSliding ? TempTime : currentTime || 0}
+  onChange={(e) => setTempTime(Number(e.target.value))}
+
+  // Desktop support
+  onMouseDown={() => setIsSliding(true)}
   onMouseUp={(e) => {
-  const target = e.target as HTMLInputElement;
-  AudioController.seek(Number(target.value));
-  setIsSliding(false);
-}}
-          className="w-full accent-purple-500 h-2 rounded-full bg-white/20"
-        />
+    const target = e.target as HTMLInputElement;
+    AudioController.seek(Number(target.value));
+    setIsSliding(false);
+  }}
+
+  // Mobile support
+  onTouchStart={() => setIsSliding(true)}
+  onTouchEnd={(e) => {
+    const input = e.target as HTMLInputElement;
+    AudioController.seek(Number(input.value));
+    setIsSliding(false);
+  }}
+
+  className="w-full accent-purple-500 h-2 rounded-full bg-white/20"
+/>
+
         <span className="w-10">{formatTime(duration)}</span>
       </div>
     </div>
